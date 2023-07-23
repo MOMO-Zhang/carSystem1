@@ -7,6 +7,8 @@ public class Car {
     private String carType;
     private String price;
     private String carSeries;
+    private Long quantity;
+    private Integer carNum;
 
     public int getId() {
         return id;
@@ -46,6 +48,22 @@ public class Car {
 
     public void setCarSeries(String carSeries) {
         this.carSeries = carSeries;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getCarNum() {
+        return carNum;
+    }
+
+    public void setCarNum(Integer carNum) {
+        this.carNum = carNum;
     }
 
     @Override

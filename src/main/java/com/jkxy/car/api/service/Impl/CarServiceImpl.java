@@ -43,4 +43,27 @@ public class CarServiceImpl implements CarService {
     public void insertCar(Car car) {
         carDao.insertCar(car);
     }
+
+    @Override
+    public boolean buyCar(int id ,int carNum){
+        Car temp = carDao.findById(id);
+        if (temp.getCarNum()<carNum){
+            System.out.println("库存不足，无法购买");
+            return false;
+        }else{
+            ReentrantLock lock = new ReentrantLock();
+            temp.setCarNum(temp.getCarNum()-carNum);
+            lock.lock();
+            carDao.updateById(temp);
+            lock.unlock();
+            System.out.println("购买成功");
+            System.out.println("当前车数"+temp.getCarNum());
+        }
+        return true;
+    }
+
+    @Override
+    public List<Car> fuzzyFindByCarName(String carName, Long start, Long end) {
+        return carDao.fuzzyFindByCarName(carName, start, end);
+    }
 }

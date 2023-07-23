@@ -85,4 +85,21 @@ public class CarController {
         carService.insertCar(car);
         return JSONResult.ok();
     }
+
+    @PostMapping("buy/{carId}/{count}")
+    public JSONResult buyCar(@PathVariable Integer carId, @PathVariable Integer carNum) {
+        if (carService.buyCar(carId, carNum)){
+            return JSONResult.ok("已购买"+ carNum +"辆");
+        }else{
+            return JSONResult.errorMsg("车辆不足！！！");
+        }
+    }
+
+    @GetMapping("fuzzyFindByCarName/{carName}/{start}/{end}")
+    public JSONResult fuzzyFindByCarName(@PathVariable String carName,
+                                         @PathVariable Long start,
+                                         @PathVariable Long end) {
+        List<Car> cars = carService.fuzzyFindByCarName(carName, start, end);
+        return JSONResult.ok(cars);
+    }
 }
