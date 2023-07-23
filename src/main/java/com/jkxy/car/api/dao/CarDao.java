@@ -25,4 +25,7 @@ public interface CarDao {
 
     @Insert("insert into carMessage(carName,carType,price,carSeries) values(#{carName},#{carType},#{price},#{carSeries})")
     void insertCar(Car car);
+
+    @Select("select * from carMessage where carName like concat('%',#{carName},'%') limit #{start}, #{end}")
+    List<Car> fuzzyFindByCarName(String carName, Long start, Long end);
 }
